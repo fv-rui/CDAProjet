@@ -1,0 +1,13 @@
+{
+  "name": "eduplanlink",
+  "version": "1.0.0",
+  "description": "EduPlanLink project",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo 'No start script required'"
+  },
+  "dependencies": {
+    "bootstrap": "^5.0.0",
+    "@popperjs/core": "^2.9.3"
+  }
+}

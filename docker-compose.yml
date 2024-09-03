@@ -1,30 +1,61 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: php_container
+  web:
+    build: .
+    container_name: php_apache
+    ports:
+      - "80:80"
     volumes:
       - .:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - mongo
+
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: eduplanlink
+      MYSQL_USER: userAdmin
+      MYSQL_PASSWORD: adminPassword
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+    ports:
+      - "3306:3306"
+
+  mongo:
+    image: mongo:4.4
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "8080:80"
     depends_on:
       - db
+    networks:
+      - app-network
 
-  db:
-    image: mysql:8.0
-    container_name: db_container
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: eduplanlink
-      MYSQL_USER: user
-      MYSQL_PASSWORD: userpassword
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  db_data:
+  db-data:
+  mongo-data:

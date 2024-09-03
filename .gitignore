@@ -1,0 +1,5 @@
+# Répertoire vendor généré par Composer (dépendances PHP)
+vendor/
+
+# Répertoire node_modules généré par npm/yarn (dépendances Node.js)
+node_modules/

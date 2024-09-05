@@ -1,0 +1,15 @@
+{
+    "name": "cdaprojet/eduplanlink",
+    "description": "EduPlanLink : Une plateforme collaborative pour connecter les organismes de formation, les formateurs, les entreprises, et les candidats autour d'une gestion fluide des plannings et des parcours éducatifs.",
+    "type": "project",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "mongodb/mongodb": "^1.9"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Veiga Rui"
+        }
+    ]
+}
